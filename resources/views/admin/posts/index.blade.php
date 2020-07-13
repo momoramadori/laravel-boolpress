@@ -21,8 +21,12 @@
             <td>{{$post->content}}</td>
             <td class='text-right'>
                 <a class='btn btn-success' href="{{ route('admin.posts.show',['post' => $post->id])}}">Dettagli</a>
-                <a class='btn btn-warning' href="">Modifica</a>
-                <a class='btn btn-danger' href="">Elimina</a>
+                <a class='btn btn-warning' href="{{route('admin.posts.edit',['post' => $post->id])}}">Modifica</a>
+                <form class= 'd-inline' action="{{route('admin.posts.destroy', ['post'=> $post->id])}}" method='POST'>
+                    @csrf
+                    @method('DELETE')
+                    <input type='submit' class='btn btn-danger' value='Elimina'>
+                </form>
             </td>
         </tr>
         @empty

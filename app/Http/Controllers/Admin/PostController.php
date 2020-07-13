@@ -41,7 +41,7 @@ class PostController extends Controller
         $data = $request->all();
         $request->validate([
             'title' => 'required|unique:posts|max:255',
-            'content' => 'required|unique:posts',
+            'content' => 'required',
         ]);
         $slug = Str::of($data['title'])->slug('-');
         $data['slug']= $slug;
@@ -57,11 +57,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $post = Post::find($id);
-        return view('admin.posts.show', ['post' => $post]);
-    }
+    // public function show($id)
+    // {
+    //     $post = Post::find($id);
+    //     return view('admin.posts.show', ['post' => $post]);
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -71,7 +71,8 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post= Post::find($id);
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -83,7 +84,16 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:255|unique:posts,title,'.$id,
+            'content' => 'required',
+        ]);
+        $data = $request->all();
+        $newPost = Post::find($id);
+        $slug = Str::of($data['title'])->slug('-');
+        $data['slug']= $slug;
+        $newPost->update($data);
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -94,6 +104,8 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+        return redirect()->route('admin.posts.index');
     }
 }
