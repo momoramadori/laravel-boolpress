@@ -1,12 +1,16 @@
 @extends('layouts.dashboard')
 @section('content')
+<div class='d-flex justify-content-between align-items-center'>
+    <h1>Tabella Post</h1>
+    <a class='btn btn-primary' href="{{route('admin.posts.create')}}"> Nuovo Post</a>
+</div>
 <table class="table table-dark">
     <thead>
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Titolo</th>
         <th scope="col">Contenuto</th>
-        <th scope="col">Azioni</th>
+        <th class='text-right' scope="col">Azioni</th>
       </tr>
     </thead>
     <tbody>
@@ -15,8 +19,8 @@
             <th scope="row">{{$post->id}}</th>
             <td>{{$post->title}}</td>
             <td>{{$post->content}}</td>
-            <td>
-                <a class='btn btn-default' href="">Dettagli</a>
+            <td class='text-right'>
+                <a class='btn btn-success' href="{{ route('admin.posts.show',['post' => $post->id])}}">Dettagli</a>
                 <a class='btn btn-warning' href="">Modifica</a>
                 <a class='btn btn-danger' href="">Elimina</a>
             </td>
