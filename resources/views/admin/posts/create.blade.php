@@ -20,6 +20,6 @@
         <label for="contenuto">CONTENUTO:</label>
         <textarea type="text" name='content' class='form-control' id='titolo' placeholder="Inserire contenuto articolo...">{{old('content')}}</textarea> 
     </div>
-    <button class='btn btn-ptimary' type='submit'>Salva</button>
+    <button class='btn btn-primary' type='submit'>Salva</button>
 </form>
 @endsection
