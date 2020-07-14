@@ -19,6 +19,10 @@
                     <span class="font-weight-bold"> SLUG: </span>
                     {{$post->slug}}
                 </p>
+                <p> 
+                    <span class="font-weight-bold"> CATEGORIA: </span>
+                    {{($post->category->name ?? '')}}
+                </p>
                 <p>
                     <span class="font-weight-bold"> DATA CREAZIONE: </span>
                     {{$post->created_at}}
