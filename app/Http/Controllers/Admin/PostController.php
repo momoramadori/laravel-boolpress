@@ -44,6 +44,14 @@ class PostController extends Controller
             'content' => 'required',
         ]);
         $slug = Str::of($data['title'])->slug('-');
+        $slug_iniziale = $slug;
+        $founded_post = Post::where('slug',$slug)->first();
+        $counter = 0;
+        while ($founded_post) {
+            $counter++;
+            $slug = $slug_iniziale . '-' . $counter;
+            $founded_post = Post::where('slug',$slug)->first();
+        }
         $data['slug']= $slug;
         $newPost = new Post();
         $newPost->fill($data);
@@ -57,11 +65,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function show($id)
-    // {
-    //     $post = Post::find($id);
-    //     return view('admin.posts.show', ['post' => $post]);
-    // }
+    public function show($id)
+    {
+        $post = Post::find($id);
+        return view('admin.posts.show', ['post' => $post]);
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -88,10 +96,21 @@ class PostController extends Controller
             'title' => 'required|max:255|unique:posts,title,'.$id,
             'content' => 'required',
         ]);
+
         $data = $request->all();
         $newPost = Post::find($id);
+
         $slug = Str::of($data['title'])->slug('-');
+        $slug_iniziale = $slug;
+        $founded_post = Post::where('slug',$slug)->first();
+        $counter = 0;
+        while ($founded_post) {
+            $counter++;
+            $slug = $slug_iniziale . '-' . $counter;
+            $founded_post = Post::where('slug',$slug)->first();
+        }
         $data['slug']= $slug;
+
         $newPost->update($data);
         return redirect()->route('admin.posts.index');
     }
