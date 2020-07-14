@@ -19,7 +19,7 @@
         <tr>
             <th scope="row">{{$post->id}}</th>
             <td>{{$post->title}}</td>
-            <td>{{$post->content}}</td>
+            <td>{{$post->slug}}</td>
             <td>{{($post->category->name ?? '')}}</td>
             <td class='text-right'>
                 <a class='btn btn-success' href="{{ route('admin.posts.show',['post' => $post->id])}}">Dettagli</a>
