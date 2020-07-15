@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Post;
 use App\Category;
+use App\Tag;
 
 class PostController extends Controller
 {
@@ -31,6 +32,20 @@ class PostController extends Controller
                 'posts' => $posts
             ];
             return view('guest.posts.category', $data);
+        } else {
+            return abort('404');
+        }
+    }
+
+    public function tag($slug) {
+        $tag = Tag::where('slug',$slug)->first();
+        if ($tag) {
+            $posts = $tag->posts;
+            $data =[
+                'tag' => $tag,
+                'posts' => $posts
+            ];
+            return view('guest.posts.tag', $data);
         } else {
             return abort('404');
         }
