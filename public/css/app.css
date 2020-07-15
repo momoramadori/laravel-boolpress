@@ -10928,3 +10928,12 @@ a.text-dark:focus {
   }
 }
 
+th {
+  max-width: 20%;
+  overflow-x: hidden;
+}
+
+th:last-child {
+  width: 30%;
+}
+

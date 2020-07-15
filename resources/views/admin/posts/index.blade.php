@@ -4,7 +4,7 @@
     <h1>Tabella Post</h1>
     <a class='btn btn-primary' href="{{route('admin.posts.create')}}"> Nuovo Post</a>
 </div>
-<table class="table table-dark">
+<table class="table table-dark table-responsive ">
     <thead>
       <tr>
         <th scope="col">ID</th>

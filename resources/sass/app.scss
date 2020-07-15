@@ -6,3 +6,11 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+th {
+    max-width: 20%;
+    overflow-x: hidden;
+    &:last-child {
+       width: 30%; 
+    }
+}
