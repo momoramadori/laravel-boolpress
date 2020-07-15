@@ -11,6 +11,7 @@
         <th scope="col">Titolo</th>
         <th scope="col">Contenuto</th>
         <th scope="col">Categoria</th>
+        <th scope="col">Tags</th>
         <th class='text-right' scope="col">Azioni</th>
       </tr>
     </thead>
@@ -21,6 +22,13 @@
             <td>{{$post->title}}</td>
             <td>{{$post->slug}}</td>
             <td>{{($post->category->name ?? '')}}</td>
+            <td>TAG:
+                @forelse ($post->tags as $tag)
+                    {{$tag->name}}{{$loop->last ? '':','}}
+                @empty
+                    -
+                @endforelse
+            </td>
             <td class='text-right'>
                 <a class='btn btn-success' href="{{ route('admin.posts.show',['post' => $post->id])}}">Dettagli</a>
                 <a class='btn btn-warning' href="{{route('admin.posts.edit',['post' => $post->id])}}">Modifica</a>

@@ -20,6 +20,16 @@
                     <span class="font-weight-bold"> SLUG: </span>
                     {{$post->slug}}
                 </p>
+                <p>
+                    <p> 
+                        <span class="font-weight-bold"> TAG: </span>
+                        @forelse ($post->tags as $tag)
+                            {{$tag->name}}{{$loop->last ? '':','}}
+                        @empty
+                            -
+                        @endforelse
+                     </p>
+                </p>
                 <p> 
                     <span class="font-weight-bold"> CATEGORIA: </span>
                     {{($post->category->name ?? '')}}

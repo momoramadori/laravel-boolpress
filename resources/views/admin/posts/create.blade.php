@@ -29,6 +29,16 @@
             @endforeach
         </select>
     </div>
+    <div>
+        <div class="row">
+            @foreach ($tags as $tag)
+            <div class="form-check">
+            <input id="checkbox" type="checkbox" value='{{$tag->id}}' name='tags[]' {{in_array($tag->id,old('tags', [])) ? 'checked':''}}>
+                <label for="checkbox">{{$tag->name}}</label>
+            </div>
+            @endforeach
+        </div>
+    </div>
     <button class='btn btn-primary' type='submit'>Salva</button>
 </form>
 @endsection

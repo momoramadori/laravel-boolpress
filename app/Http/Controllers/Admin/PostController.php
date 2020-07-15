@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Post;
+use App\Tag;
 
 class PostController extends Controller
 {
@@ -17,7 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::with('category')->get();
+        $posts = Post::with('category','tags')->get();
         return view('admin.posts.index', compact('posts'));
     }
 
@@ -28,8 +29,13 @@ class PostController extends Controller
      */
     public function create()
     {
+        $tags= Tag::all();
         $categories = Category::all();
-        return view('admin.posts.create', compact('categories'));
+        $data =[
+            'tags' => $tags,
+            'categories'=> $categories
+        ];
+        return view('admin.posts.create', $data);
     }
 
     /**
@@ -58,6 +64,9 @@ class PostController extends Controller
         $newPost = new Post();
         $newPost->fill($data);
         $newPost->save();
+        if (!empty($data['tags'])) {
+            $newPost->tags()->sync($data['tags']);
+         };
         return redirect()->route('admin.posts.index');
     }
 
@@ -85,11 +94,13 @@ class PostController extends Controller
      */
     public function edit($id)
     {
+        $tags = Tag::all();
         $post= Post::find($id);
         $categories = Category::all();
         $data = [
             'post' => $post,
-            'categories' => $categories
+            'categories' => $categories,
+            'tags' => $tags
         ];
         if ($post) {
             return view('admin.posts.edit', $data);
@@ -127,6 +138,12 @@ class PostController extends Controller
         $data['slug']= $slug;
 
         $newPost->update($data);
+
+        if (!empty($data['tags'])) {
+            $newPost->tags()->sync($data['tags']);
+        } else {
+            $newPost->tags()->sync([]);
+        };
         return redirect()->route('admin.posts.index');
     }
 
