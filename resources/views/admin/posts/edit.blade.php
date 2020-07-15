@@ -9,6 +9,7 @@
         </ul>
     </div>
 @endif
+<h1>MODIFICA POST</h1>
 <form action="{{ route('admin.posts.update',['post'=> $post->id]) }}" method='POST'>
     @csrf
     @method('PUT')
@@ -25,7 +26,7 @@
         <select name="category_id" id="categoria">
         <option value="">Seleziona categoria</option>
             @foreach ($categories as $category)
-            <option value="{{$category->id}}" {{($post->category->id ?? '') ==  $category->id ? 'selected' : ''}}>{{$category->name}}</option>
+            <option value="{{$category->id}}" {{old('category_id',($post->category->id ?? '')) ==  $category->id ? 'selected' : ''}}>{{$category->name}}</option>
             @endforeach
         </select>
     </div>

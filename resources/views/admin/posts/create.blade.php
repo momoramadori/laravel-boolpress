@@ -9,7 +9,7 @@
         </ul>
     </div>
 @endif
-
+  <h1>CREA POST</h1>
   <form action="{{ route('admin.posts.store') }}" method='POST'>
     @csrf
     <div class="form-group">
@@ -25,7 +25,7 @@
         <select name="category_id" id="categoria">
         <option value="">Seleziona categoria</option>
             @foreach ($categories as $category)
-            <option value="{{$category->id}}">{{$category->name}}</option>
+            <option value="{{$category->id}}" {{old('category_id') == $category->id ? 'selected' : ''}}>{{$category->name}}</option>
             @endforeach
         </select>
     </div>

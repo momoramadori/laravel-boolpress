@@ -3,6 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
+                <h1>SINGOLO POST</h1>
                 <p>
                     <span class="font-weight-bold"> ID: </span>
                     {{$post->id}}
