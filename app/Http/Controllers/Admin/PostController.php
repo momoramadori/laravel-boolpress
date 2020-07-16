@@ -54,19 +54,13 @@ class PostController extends Controller
             'image' => 'image|max:1024'
         ]);
         $slug = Str::of($data['title'])->slug('-');
-        $slug_iniziale = $slug;
-        $founded_post = Post::where('slug',$slug)->first();
-        $counter = 0;
-        while ($founded_post) {
-            $counter++;
-            $slug = $slug_iniziale . '-' . $counter;
-            $founded_post = Post::where('slug',$slug)->first();
-        }
+        createMySlug($slug);
         $data['slug']= $slug;
-        if ($data['image']) {
+        if (!empty($data['image'])) {
             $img_path = Storage::put('uploads',$data['image']);
+            $data['cover_image']= $img_path;
         }
-        $data['cover_image']= $img_path;
+        
         $newPost = new Post();
         $newPost->fill($data);
         $newPost->save();
@@ -127,26 +121,21 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|max:255|unique:posts,title,'.$id,
             'content' => 'required',
+            'image' => 'image|max:1024'
         ]);
 
         $data = $request->all();
         $newPost = Post::find($id);
 
         $slug = Str::of($data['title'])->slug('-');
-        $slug_iniziale = $slug;
-        $founded_post = Post::where('slug',$slug)->first();
-        $counter = 0;
-        while ($founded_post) {
-            $counter++;
-            $slug = $slug_iniziale . '-' . $counter;
-            $founded_post = Post::where('slug',$slug)->first();
-        }
+        createMySlug($slug);
         $data['slug']= $slug;
 
-        if ($data['image']) {
+        if (!empty($data['image'])) {
             $img_path = Storage::put('uploads',$data['image']);
+            $data['cover_image']= $img_path;
         }
-        $data['cover_image']= $img_path;
+        
         $newPost->update($data);
 
         if (!empty($data['tags'])) {
