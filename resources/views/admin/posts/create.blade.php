@@ -10,7 +10,7 @@
     </div>
 @endif
   <h1>CREA POST</h1>
-  <form action="{{ route('admin.posts.store') }}" method='POST'>
+  <form action="{{ route('admin.posts.store') }}" method='POST' enctype='multipart/form-data'>
     @csrf
     <div class="form-group">
         <label for="titolo">TITOLO:</label>
@@ -19,6 +19,10 @@
     <div class="form-group">
         <label for="contenuto">CONTENUTO:</label>
         <textarea type="text" name='content' class='form-control' id='titolo' placeholder="Inserire contenuto articolo...">{{old('content')}}</textarea> 
+    </div>
+    <div class="form-group">
+        <label for="immagine">IMMAGINE:</label>
+        <input type="file" name='image' id='immagine'>   
     </div>
     <div class="form-group">
         <label for="categoria">CATEGORIA:</label>

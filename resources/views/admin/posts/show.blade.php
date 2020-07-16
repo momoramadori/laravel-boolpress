@@ -3,15 +3,12 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1>SINGOLO POST</h1>
-                <p>
-                    <span class="font-weight-bold"> ID: </span>
-                    {{$post->id}}
-                </p>
+                <h1>POST CON ID {{$post->id}}</h1>
                 <p>
                     <span class="font-weight-bold"> TITOLO: </span>
                     {{$post->title}}
                 </p>
+                <img src="{{ asset('storage/' . $post->cover_image)}}" alt="{{$post->title}}">
                 <p>
                     <span class="font-weight-bold"> CONTENUTO: </span>
                     {{$post->content}}

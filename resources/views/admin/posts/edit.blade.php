@@ -10,7 +10,7 @@
     </div>
 @endif
 <h1>MODIFICA POST</h1>
-<form action="{{ route('admin.posts.update',['post'=> $post->id]) }}" method='POST'>
+<form action="{{ route('admin.posts.update',['post'=> $post->id]) }}" method='POST' enctype='multipart/form-data'>
     @csrf
     @method('PUT')
     <div class="form-group">
@@ -20,6 +20,10 @@
     <div class="form-group">
         <label for="contenuto">CONTENUTO:</label>
         <textarea type="text" name='content' class='form-control' id='titolo' >{{old('content', $post->content)}}</textarea> 
+    </div>
+    <div class="form-group">
+        <label for="immagine">IMMAGINE:</label>
+        <input type="file" name='image' id='immagine'>   
     </div>
     <div class="form-group">
         <label for="categoria">CATEGORIA:</label>

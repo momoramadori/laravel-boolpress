@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Post;
 use App\Tag;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -50,6 +51,7 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|unique:posts|max:255',
             'content' => 'required',
+            'image' => 'image|max:1024'
         ]);
         $slug = Str::of($data['title'])->slug('-');
         $slug_iniziale = $slug;
@@ -61,6 +63,10 @@ class PostController extends Controller
             $founded_post = Post::where('slug',$slug)->first();
         }
         $data['slug']= $slug;
+        if ($data['image']) {
+            $img_path = Storage::put('uploads',$data['image']);
+        }
+        $data['cover_image']= $img_path;
         $newPost = new Post();
         $newPost->fill($data);
         $newPost->save();
@@ -137,6 +143,10 @@ class PostController extends Controller
         }
         $data['slug']= $slug;
 
+        if ($data['image']) {
+            $img_path = Storage::put('uploads',$data['image']);
+        }
+        $data['cover_image']= $img_path;
         $newPost->update($data);
 
         if (!empty($data['tags'])) {
