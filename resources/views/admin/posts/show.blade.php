@@ -8,7 +8,9 @@
                     <span class="font-weight-bold"> TITOLO: </span>
                     {{$post->title}}
                 </p>
+                @if ($post->cover_image)
                 <img src="{{ asset('storage/' . $post->cover_image)}}" alt="{{$post->title}}">
+                @endif
                 <p>
                     <span class="font-weight-bold"> CONTENUTO: </span>
                     {{$post->content}}

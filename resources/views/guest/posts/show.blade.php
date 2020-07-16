@@ -5,7 +5,9 @@
             <div class="col-12">
                 <h1>SINGOLO POST</h1>
                 <h1>{{$post->title}}</h1>
-                <img src="{{asset('storage/' . $post->cover_image)}}" alt="{{$post->title}}">
+                @if ($post->cover_image)
+                <img src="{{ asset('storage/' . $post->cover_image)}}" alt="{{$post->title}}">
+                @endif
                 <p>{{$post->content}}</p>
                 <p>CATEGORIA :
                     @if ($post->category) 
