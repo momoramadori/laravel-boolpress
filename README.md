@@ -77,3 +77,6 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# Laravel-boolpress
+#39 : Esercizio completo su laravel con gestione delle CRUD, creazione di relazioni one-to-many e many-to-many, gestione di immagini e ricezione di mail da form tramite mailtrap. 
